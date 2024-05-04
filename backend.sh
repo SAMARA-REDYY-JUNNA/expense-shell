@@ -27,14 +27,14 @@ else
     echo "you are super user."
 fi
 
-dnf module disable nodejs -y $>>$LOGFILE
+dnf module disable nodejs -y &>>$LOGFILE
 VALIDATE $? "disabling default nodejs"
 
-dnf module enable nodejs:20 -y $>>$LOGFILE
+dnf module enable nodejs:20 -y &>>$LOGFILE
 VALIDATE $? "enabling nodeja"
 
-dnf install nodejs -y $>>$LOGFILE
+dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "installing nodejs"
 
-useradd expense $>>$LOGFILE
+useradd expense &>>$LOGFILE
 VALIDATE $? "creating expense user"
