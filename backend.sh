@@ -53,30 +53,30 @@ VALIDATE $? "creating app directory"
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
 VALIDATE $? "downloading backend code"
  
- cd /app &>>$LOGFILE
- unzip /tmp/backend.zip
- VALIDATE $? "extracted backend code"
+ cd /app 
+ unzip /tmp/backend.zip &>>$LOGFILE
+ VALIDATE $? "Extracted backend code"
 
  npm install &>>$LOGFILE
- VALIDATE $? "installing nodejs dependencies"
+ VALIDATE $? "Installing nodejs dependencies"
 
  cp /home/ec2-user/expense-shell/backend.service /etc/system/backend.service &>>$LOGFILE
  VALIDATE $? "copied backend service"
 
  systemctl daemon-reload &>>$LOGFILE
- VALIDATE $? "daemon reload"
+ VALIDATE $? "Daemon reload"
 
  systemctl start backend &>>$LOGFILE
- VALIDATE $? "starting backend"
+ VALIDATE $? "Starting backend"
 
  systemctl enable backend &>>$LOGFILE
- VALIDATE $? "enabling backend"
+ VALIDATE $? "Enabling backend"
 
  dnf install mysql -y &>>$LOGFILE
- VALIDATE $? "installing mysql client"
+ VALIDATE $? "Installing mysql client"
 
  mysql -h db.mydaws.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
- VALIDATE $? "schema loading"
+ VALIDATE $? "Schema loading"
 
  systemctl restart backend &>>$LOGFILE
- VALIDATE $? "restarting backend"
+ VALIDATE $? "Restarting backend"
